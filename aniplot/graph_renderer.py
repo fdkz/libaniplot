@@ -3,7 +3,6 @@ import math
 import time
 
 import copengl as gl
-import copenglconstants as glconst
 
 
 class GraphRenderer:
@@ -167,7 +166,7 @@ class GraphRenderer:
         sign = 1 if px_end > px_begin else -1
         px_step  = pixels_per_volt * v_step * sign
 
-        gl.glBegin(glconst.GL_LINES)
+        gl.glBegin(gl.GL_LINES)
 
         px = px_begin
         while px * sign < px_end:
@@ -207,7 +206,7 @@ class GraphRenderer:
         sign = 1 if px_end > px_begin else -1
         px_step  = pixels_per_second * st_step * sign
 
-        gl.glBegin(glconst.GL_LINES)
+        gl.glBegin(gl.GL_LINES)
 
         px = px_begin
         while px * sign < px_end:
@@ -255,13 +254,13 @@ class GraphRenderer:
             gl.glScalef(1., float(h - 1.) / h2, 1.)
             gl.glTranslatef(0., -y2, 0.)
 
-            gl.glEnable(glconst.GL_LINE_SMOOTH)
+            gl.glEnable(gl.GL_LINE_SMOOTH)
             gl.glScalef(w / w2, 1., 1.)
 
             ch = self.channels[0]
             hh = (ch.value_max - ch.value_min) * 10.
             gl.glColor4f(.13, 0.13, 0.13 ,1.)
-            gl.glBegin(glconst.GL_QUADS)
+            gl.glBegin(gl.GL_QUADS)
             gl.glVertex3f( 0., ch.value_min - hh, 0. )
             gl.glVertex3f( w2, ch.value_min - hh, 0. )
             gl.glVertex3f( w2, ch.value_min, 0. )
@@ -272,12 +271,12 @@ class GraphRenderer:
             gl.glVertex3f( 0., ch.value_max + hh, 0. )
             gl.glEnd()
 
-            gl.glDisable(glconst.GL_LINE_SMOOTH)
+            gl.glDisable(gl.GL_LINE_SMOOTH)
             gl.glPopMatrix()
 
-        gl.glDisable(glconst.GL_LINE_SMOOTH)
+        gl.glDisable(gl.GL_LINE_SMOOTH)
         self._render_grid_lines(w, h, x2, y2, w2, h2)
-        gl.glEnable(glconst.GL_LINE_SMOOTH)
+        gl.glEnable(gl.GL_LINE_SMOOTH)
 
         gl.glPushMatrix()
         gl.glScalef(1., float(h - 1.) / h2, 1.)
@@ -291,7 +290,7 @@ class GraphRenderer:
         gl.glPopMatrix()
 
         gl.glTranslatef(0., -0.5, 0.)
-        gl.glDisable(glconst.GL_LINE_SMOOTH)
+        gl.glDisable(gl.GL_LINE_SMOOTH)
         self._render_grid_text(w, h, x2, y2, w2, h2)
 
         gl.glPopMatrix()

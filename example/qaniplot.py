@@ -14,7 +14,6 @@ import fps_counter
 
 import gltext
 import copengl as gl
-import copenglconstants as glconst
 
 
 class AniplotBase(QtOpenGL.QGLWidget):
@@ -55,27 +54,27 @@ class AniplotBase(QtOpenGL.QGLWidget):
         self.makeCurrent()
 
     def initializeGL(self):
-        gl.glDisable(glconst.GL_TEXTURE_2D)
-        gl.glDisable(glconst.GL_DEPTH_TEST)
-        gl.glDisable(glconst.GL_FOG)
-        gl.glDisable(glconst.GL_DITHER)
-        gl.glDisable(glconst.GL_LIGHTING)
-        gl.glShadeModel(glconst.GL_FLAT)
-        gl.glEnable(glconst.GL_BLEND)
-        gl.glBlendFunc(glconst.GL_SRC_ALPHA, glconst.GL_ONE_MINUS_SRC_ALPHA)
-        gl.glDisable(glconst.GL_LINE_SMOOTH)
-        gl.glEnable(glconst.GL_POINT_SMOOTH)
-        gl.glDisable(glconst.GL_LINE_STIPPLE)
-        gl.glDisable(glconst.GL_LIGHT1)
-        #glFrontFace(glconst.GL_CW)
+        gl.glDisable(gl.GL_TEXTURE_2D)
+        gl.glDisable(gl.GL_DEPTH_TEST)
+        gl.glDisable(gl.GL_FOG)
+        gl.glDisable(gl.GL_DITHER)
+        gl.glDisable(gl.GL_LIGHTING)
+        gl.glShadeModel(gl.GL_FLAT)
+        gl.glEnable(gl.GL_BLEND)
+        gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
+        gl.glDisable(gl.GL_LINE_SMOOTH)
+        gl.glEnable(gl.GL_POINT_SMOOTH)
+        gl.glDisable(gl.GL_LINE_STIPPLE)
+        gl.glDisable(gl.GL_LIGHT1)
+        #glFrontFace(gl.GL_CW)
 
-        gl.glEnable(glconst.GL_NORMALIZE)
-        gl.glHint(glconst.GL_PERSPECTIVE_CORRECTION_HINT, glconst.GL_NICEST)
-        gl.glDisable(glconst.GL_CULL_FACE)
-        #glCullFace(glconst.GL_BACK)
-        gl.glPolygonMode(glconst.GL_FRONT_AND_BACK, glconst.GL_FILL)
+        gl.glEnable(gl.GL_NORMALIZE)
+        gl.glHint(gl.GL_PERSPECTIVE_CORRECTION_HINT, gl.GL_NICEST)
+        gl.glDisable(gl.GL_CULL_FACE)
+        #glCullFace(gl.GL_BACK)
+        gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL)
         # wireframe view
-        #glPolygonMode(glconst.GL_FRONT_AND_BACK, glconst.GL_LINE)
+        #glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)
 
         self.gltext.init()
 
@@ -106,19 +105,19 @@ class AniplotBase(QtOpenGL.QGLWidget):
             self.graph_window.tick()
 
             gl.glClearColor(0.2, 0.2, 0.2, 1.0)
-            gl.glClear(glconst.GL_COLOR_BUFFER_BIT | glconst.GL_DEPTH_BUFFER_BIT)
+            gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
 
             gl.glViewport(0, 0, w, h)
 
-            gl.glMatrixMode(glconst.GL_PROJECTION)
+            gl.glMatrixMode(gl.GL_PROJECTION)
             gl.glLoadIdentity()
             gl.glOrtho(0., w, h, 0., -100, 100)
 
-            gl.glDisable(glconst.GL_DEPTH_TEST)
-            gl.glDisable(glconst.GL_TEXTURE_2D)
-            gl.glDisable(glconst.GL_LIGHTING)
+            gl.glDisable(gl.GL_DEPTH_TEST)
+            gl.glDisable(gl.GL_TEXTURE_2D)
+            gl.glDisable(gl.GL_LIGHTING)
 
-            gl.glMatrixMode(glconst.GL_MODELVIEW)
+            gl.glMatrixMode(gl.GL_MODELVIEW)
             gl.glLoadIdentity()
             gl.glScalef(1.,1.,-1.)
 
@@ -128,10 +127,10 @@ class AniplotBase(QtOpenGL.QGLWidget):
             self.graph_window.h = h + 2
 
             # render 2d objects
-            gl.glDisable(glconst.GL_DEPTH_TEST)
-            gl.glDisable(glconst.GL_TEXTURE_2D)
+            gl.glDisable(gl.GL_DEPTH_TEST)
+            gl.glDisable(gl.GL_TEXTURE_2D)
             self.graph_window.render()
-            gl.glEnable(glconst.GL_TEXTURE_2D)
+            gl.glEnable(gl.GL_TEXTURE_2D)
             self.gltext.drawbr("fps: %.0f" % (self._fps_counter.fps), w, h, fgcolor = (.9, .9, .9, 1.), bgcolor = (0.3, 0.3, 0.3, .0))
             self.gltext.drawbm("usage: arrows, shift, mouse", w/2, h-3, fgcolor = (.5, .5, .5, 1.), bgcolor = (0., 0., 0., .0))
 

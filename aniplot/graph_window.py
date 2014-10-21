@@ -2,7 +2,6 @@ import time
 
 import draw
 import copengl as gl
-import copenglconstants as glconst
 
 
 class GraphWindow:
@@ -104,10 +103,10 @@ class GraphWindow:
         x, y, w, h = self._raw_graph_window_dim()
         xx, yy = self.parent.gl_coordinates(x, y)
         gl.glScissor(int(xx), int(yy - h), int(w), int(h))
-        gl.glEnable(glconst.GL_SCISSOR_TEST)
+        gl.glEnable(gl.GL_SCISSOR_TEST)
         #print "sy1 %.2f sy2 %.2f sy2 - sy1 %.2f" % (self.sy1, self.sy2, self.sy2 - self.sy1)
         self.graph_renderer.render(x, y, w, h, self.sx1, self.sy1, self.sx2 - self.sx1, self.sy2 - self.sy1)
-        gl.glDisable(glconst.GL_SCISSOR_TEST)
+        gl.glDisable(gl.GL_SCISSOR_TEST)
         gl.glPopMatrix()
 
         if self.render_legend:
@@ -328,7 +327,7 @@ class GraphWindow:
         gl.glPushMatrix()
         gl.glTranslatef(.5,.5,0.)
         gl.glLineWidth(1.)
-        gl.glDisable(glconst.GL_LINE_SMOOTH)
+        gl.glDisable(gl.GL_LINE_SMOOTH)
         # calculate legend window size
         w = 0.
         h = self.font.height * len(self.graph_renderer.channels)
@@ -339,7 +338,7 @@ class GraphWindow:
         draw.rect(x, y, w+24, h+4, (0.4, 0.4, 0.4, .8))
         # draw legend window example linesegments
         dy = y + 2. + self.font.height / 2.
-        gl.glEnable(glconst.GL_LINE_SMOOTH)
+        gl.glEnable(gl.GL_LINE_SMOOTH)
         for channel in self.graph_renderer.channels:
             gl.glLineWidth(channel.f_linewidth)
             draw.line(x + 4, dy, x + 14, dy, channel.f_color_avg)
