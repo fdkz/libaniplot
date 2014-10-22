@@ -303,7 +303,7 @@ class GraphWindow:
 
     def _render_scrollbar(self, x, y, w, h):
         v = .6
-        draw.line(x + 0.5, y+h + 0.5, x+w, y + h, (v,v,v,1.))
+        draw.line(x + 0.5, y+h + 0.5, x+w, y + h + 0.5, (v,v,v,1.))
 
         adc_channel = self.graph_renderer.channels[0]
         if not adc_channel.size():
