@@ -1,0 +1,1 @@
+from aniplot_widget import AniplotWidget
